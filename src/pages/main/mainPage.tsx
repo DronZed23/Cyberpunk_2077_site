@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import { ChangeEvent, useRef, useState } from 'react';
 import {CyberpunkLogo} from "./img/CyberpunkLogo";
 import {YoutubeLogo} from "./img/YoutubeLogo";
 import {FacebookLogo} from "./img/FacebookLogo";
@@ -13,15 +14,35 @@ import  picture62 from "./img/Rectangle 62.png"
 import  picture63 from "./img/Rectangle 63.png"
 import {StockLogo} from "./img/stockLogo";
 import PS from "./img/PSandXBOX.png"
+import { Checkbox } from 'antd'
 export const MainPage = () => {
 
-    const handleFileChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-        console.log("handle file change called");
-        const files = e.target.files;
-        console.log(files);
-        const filesArr = Array.prototype.slice.call(files);
-        console.log(filesArr);
-    }
+    const [file, setFile] = useState<File>();
+    const [active, setactive] = useState(0)
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    const handleUploadClick = () => {
+        // 👇 We redirect the click event onto the hidden input element
+        inputRef.current?.click();
+    };
+
+    const doNotActivated = () =>{
+        setactive(0)
+    };
+
+    const Activated = () =>{
+        setactive(1);
+        console.log("fff")
+    };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) {
+            return;
+        }
+
+        setFile(e.target.files[0]);
+
+    };
 
 
     return (
@@ -74,15 +95,25 @@ export const MainPage = () => {
                         <div className={styles.gameAndWinForm}>
                             <input className={styles.user} placeholder={"Как тебя зовут?"} id={"UserName"}></input>
                             <input className={styles.user} placeholder={"Твой е-mail"} id={"Email"}></input>
-                            
-                            <input
-                                id="fileUpolad"
-                                type="file"
-                                onChange={handleFileChange}
-                                multiple
-                                accept={'image/*'}
-                                className={styles.fileInput}
-                            />
+                            <div>
+                                <div>Upload a file:</div>
+
+                                {/* 👇 Our custom button to select and upload a file */}
+                                <button className={styles.fileUploader} onClick={handleUploadClick}><p className={styles.takePhoto}>Прикрепить скриншот</p>.png / .jpg / .pdf</button>
+
+                                {/* 👇 Notice the `display: hidden` on the input */}
+                                <input
+                                    type="file"
+                                    ref={inputRef}
+                                    onChange={handleFileChange}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+                            <button className={active === 1? styles.sendForm : styles.ContBtn}>Отправить</button>
+                            <div>
+                                <input type={"checkbox"} className={styles.checkboxSender} onClick={active == 1? () => doNotActivated() : Activated }/>
+                            </div>
+
                         </div>
                         <img src={PS}/>
                     </div>

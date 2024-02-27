@@ -177,6 +177,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 383px;
+    align-items: flex-start;
 }
 
 .user{
@@ -203,7 +204,55 @@ input::placeholder {
 
 }
 
-.fileInput{
-    background: none;
-    border: none;
+.fileUploader{
+    padding: 39px 137px 39px 137px;
+    border: 2px #777777 dashed;
+    height: 120px;
+    width: 460px;
+    color: #FFFFFF;
+}
+
+.takePhoto{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 21px;
+    border-bottom: 1px #FFFFFF solid;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.sendForm{
+    padding: 19px 50px 19px 50px;
+    background-color: #F8F200;
+    width: 192px;
+    height: 59px;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+    text-align: left;
+
+}
+
+.ContBtn{
+    padding: 19px 50px 19px 50px;
+    background-color: #494705;
+    width: 192px;
+    height: 59px;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+    text-align: left;
+}
+
+.checkboxSender{
+    height: 14px;
+    width: 14px;
+    background-color: black;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: red;
+    border-color: red;
 }

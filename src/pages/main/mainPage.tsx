@@ -11,7 +11,19 @@ import  background23 from "./img/22 1.png"
 import  picture61 from "./img/Rectangle 61.png"
 import  picture62 from "./img/Rectangle 62.png"
 import  picture63 from "./img/Rectangle 63.png"
+import {StockLogo} from "./img/stockLogo";
+import PS from "./img/PSandXBOX.png"
 export const MainPage = () => {
+
+    const handleFileChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        console.log("handle file change called");
+        const files = e.target.files;
+        console.log(files);
+        const filesArr = Array.prototype.slice.call(files);
+        console.log(filesArr);
+    }
+
+
     return (
         <div>
             <div className={styles.header}>
@@ -53,12 +65,25 @@ export const MainPage = () => {
                 <div className={styles.gameAndWinContainerSmall}>
                     <div className={styles.gameAndWinTextContainer}>
                         <div className={styles.gameAndWinTitleContainer}>
-
+                            <StockLogo/>
+                            <p className={styles.gameAndWinTitleText}>Играй и выигрывай!</p>
                         </div>
-                        <p>Играй в <p className={styles.cyberpunkDescriptionCyber}>Cyberpunk 2077</p> и получи возможность выиграть консоль <p className={styles.cyberpunkDescriptionCyber}>Xbox Series X</p> или <p className={styles.cyberpunkDescriptionCyber}>Sony PlayStation 5!</p> Заполни форму ниже и приложи скриншот о покупке игры. Итоги розыгрыша будут подведены 1 февраля. Удачи! ;)</p>
+                        <p className={styles.gameAndWinDescriptionText}>Играй в <p className={styles.cyberpunkDescriptionCyber}>Cyberpunk 2077</p> и получи возможность выиграть консоль <p className={styles.cyberpunkDescriptionCyber}>Xbox Series X</p> или <p className={styles.cyberpunkDescriptionCyber}>Sony PlayStation 5!</p> Заполни форму ниже и приложи скриншот о покупке игры. Итоги розыгрыша будут подведены 1 февраля. Удачи! ;)</p>
                     </div>
-                    <div>
-
+                    <div className={styles.gameAndWinFormContainer}>
+                        <div className={styles.gameAndWinForm}>
+                            <input className={styles.user} placeholder={"Как тебя зовут?"} id={"UserName"}></input>
+                            <input className={styles.user} placeholder={"Твой е-mail"} id={"Email"}></input>
+                            <input
+                                id="fileUpolad"
+                                type="file"
+                                onChange={handleFileChange}
+                                multiple
+                                accept={'image/*'}
+                                className={styles.fileInput}
+                            />
+                        </div>
+                        <img src={PS}/>
                     </div>
                 </div>
             </div>

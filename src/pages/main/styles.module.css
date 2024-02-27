@@ -202,3 +202,8 @@ input::placeholder {
     text-align: left;
 
 }
+
+.fileInput{
+    background: none;
+    border: none;
+}

@@ -74,6 +74,7 @@ export const MainPage = () => {
                         <div className={styles.gameAndWinForm}>
                             <input className={styles.user} placeholder={"Как тебя зовут?"} id={"UserName"}></input>
                             <input className={styles.user} placeholder={"Твой е-mail"} id={"Email"}></input>
+                            
                             <input
                                 id="fileUpolad"
                                 type="file"

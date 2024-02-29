@@ -14,7 +14,6 @@ import  picture62 from "./img/Rectangle 62.png"
 import  picture63 from "./img/Rectangle 63.png"
 import {StockLogo} from "./img/stockLogo";
 import PS from "./img/PSandXBOX.png"
-import { Checkbox } from 'antd'
 export const MainPage = () => {
 
     const [file, setFile] = useState<File>();

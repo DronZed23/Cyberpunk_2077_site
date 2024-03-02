@@ -3,7 +3,7 @@ export const getDataLocalStorageForm = (name : string) => {
     return data === null ? null : JSON.parse(data);
 };
 
-export const setDataLocalStorageForm = (name: string, data: number | { Golang: { name: string; value: number }; Java: { name: string; value: number }; CPP: { name: string; value: number }; JavaScript: { name: string; value: number }; Haskell: { name: string; value: number }; Elixir: { name: string; value: number }; Python: { name: string; value: number } }) => {
+export const setDataLocalStorageForm = (name: string, data: { userEmail: string; username: string }) => {
     const dataJSON = JSON.stringify(data);
     window.localStorage.setItem(name, dataJSON);
 };

@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { ChangeEvent, useRef, useState } from 'react';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {CyberpunkLogo} from "./img/CyberpunkLogo";
 import {YoutubeLogo} from "./img/YoutubeLogo";
 import {FacebookLogo} from "./img/FacebookLogo";
@@ -14,24 +14,80 @@ import  picture62 from "./img/Rectangle 62.png"
 import  picture63 from "./img/Rectangle 63.png"
 import {StockLogo} from "./img/stockLogo";
 import PS from "./img/PSandXBOX.png"
+import {Mark} from "./img/mark";
+import {userData} from "../../untils/constants";
+import {getDataLocalStorageForm, setDataLocalStorageForm} from "../../API/formLocalStorage";
+import {PopUpNotifications} from "./PopUpNotifications";
 export const MainPage = () => {
-
+    console.log(getDataLocalStorageForm("userData"));
     const [file, setFile] = useState<File>();
     const [active, setactive] = useState(0)
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const [popUpVisibility, setPopupVisibility] = useState(false);
+    const [popUpVisibility1, setPopupVisibility1] = useState(false);
 
+
+    useEffect(() => {
+        if(popUpVisibility) {
+            const timer = setTimeout(() => {
+                setPopupVisibility(false);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+
+    }, [popUpVisibility]);
+
+
+    useEffect(() => {
+        if(popUpVisibility1) {
+            const timer = setTimeout(() => {
+                setPopupVisibility1(false);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+
+    }, [popUpVisibility1]);
+
+
+    const handleSendForm = () =>{
+        if (email.length == 0){
+            setPopupVisibility(true);
+            return;
+        }
+        if (name.length == 0){
+            setPopupVisibility(true);
+            return;
+        }
+        if (getDataLocalStorageForm("userData").userEmail.length !== 0){
+            setPopupVisibility1(true);
+            return;
+        }
+        if (getDataLocalStorageForm("userData").username.length !== 0){
+            setPopupVisibility1(true);
+            return;
+        }
+        userData.username = name;
+        userData.userEmail = email;
+        setactive(0);
+        setDataLocalStorageForm('userData', userData);
+        console.log(getDataLocalStorageForm('userData'))
+    };
     const handleUploadClick = () => {
-        // 👇 We redirect the click event onto the hidden input element
         inputRef.current?.click();
     };
-
+    const handleReturn = () => {
+        return;
+    }
     const doNotActivated = () =>{
         setactive(0)
     };
 
     const Activated = () =>{
         setactive(1);
-        console.log("fff")
     };
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +102,8 @@ export const MainPage = () => {
 
     return (
         <div>
+            <PopUpNotifications ide={1} popUpVisibility={popUpVisibility} setPopupVisibility={setPopupVisibility} classname0={styles.popUpContainer} classname1={styles.popUpText}/>
+            <PopUpNotifications ide={2} popUpVisibility={popUpVisibility1} setPopupVisibility={setPopupVisibility1} classname0={styles.popUpContainer} classname1={styles.popUpText}/>
             <div className={styles.header}>
                 <div className={styles.headerContainer}>
                     <CyberpunkLogo />
@@ -77,7 +135,6 @@ export const MainPage = () => {
                     </div>
                     <img src={picture61}/>
                 </div>
-
             </div>
 
             <div className={styles.gameAndWinContainerBig}>
@@ -92,8 +149,8 @@ export const MainPage = () => {
                     </div>
                     <div className={styles.gameAndWinFormContainer}>
                         <div className={styles.gameAndWinForm}>
-                            <input className={styles.user} placeholder={"Как тебя зовут?"} id={"UserName"}></input>
-                            <input className={styles.user} placeholder={"Твой е-mail"} id={"Email"}></input>
+                            <input className={styles.user} placeholder={"Как тебя зовут?"} onChange={e => setName(e.target.value)}/>
+                            <input className={styles.user} placeholder={"Твой е-mail"} onChange={e => setEmail(e.target.value)}></input>
                             <div>
                                 <div>Upload a file:</div>
 
@@ -108,11 +165,13 @@ export const MainPage = () => {
                                     style={{ display: 'none' }}
                                 />
                             </div>
-                            <button className={active === 1? styles.sendForm : styles.ContBtn}>Отправить</button>
-                            <div>
-                                <input type={"checkbox"} className={styles.checkboxSender} onClick={active == 1? () => doNotActivated() : Activated }/>
+                            <button className={active === 1? styles.sendForm : styles.ContBtn} onClick={active == 1? () => handleSendForm() : handleReturn}>Отправить</button>
+                            <div className={styles.MarkContainer}>
+                                <label className={styles.borderActiveMark} onClick={active == 1? () => doNotActivated() : Activated}>
+                                    <Mark className={active === 1? styles.ActiveMark : styles.DontActiveMark}/>
+                                </label>
+                                <p className={styles.markText}>Согласен на обработку персональных данных</p>
                             </div>
-
                         </div>
                         <img src={PS}/>
                     </div>

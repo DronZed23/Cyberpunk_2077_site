@@ -54,7 +54,7 @@
 }
 
 .learnMoreButton{
-    width: 272px;
+    width: 279px;
     height: 78px;
     padding: 19px 50px 19px 50px;
     background-color: black;
@@ -104,6 +104,10 @@
     text-align: left;
     max-width: 952px;
     color: darkgray;
+}
+
+.background23{
+    width: 100%;
 }
 
 .allPictureContainer{
@@ -247,13 +251,59 @@ input::placeholder {
     text-align: left;
 }
 
+.MarkContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 280px;
+}
 
-.checkboxSender{
+.borderActiveMark{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 14px;
     width: 14px;
-    background-color: black;
+    border: 1px #777777 solid;
 }
-.ant-checkbox-checked .ant-checkbox-inner {
-    background-color: red;
-    border-color: red;
+
+.ActiveMark{
+    display: flex;
+}
+
+
+.DontActiveMark{
+    display: none;
+}
+
+.markText{
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 14px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.popUpContainer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px 24px 20px 28px;
+    background: rgba(227, 32, 32, 0.43);
+    border: 3px solid #420000;
+    width: 150px;
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.popUpText{
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 14px;
+    text-align: left;
+    color: #FFFFFF;
 }

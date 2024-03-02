@@ -1,0 +1,10 @@
+import React from 'react';
+type Props = {
+    className: string;
+}
+export const Mark = ({ className } : Props) => (
+    <svg className={className} width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.94976 1.08233L4.00002 6.03208L1.17159 3.20365" stroke="#F8F200"/>
+    </svg>
+
+);
